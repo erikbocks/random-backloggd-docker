@@ -1,0 +1,100 @@
+ <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./.src/output.css">
+    <title>Backloggd Game Randomizer</title>
+</head>
+
+<body>
+    <main class="h-screen w-screen bg-gradient flex flex-col justify-evenly items-center">
+        <section class="w-11/12 h-full flex flex-col justify-evenly items-center xl:w-1/2 xl:h-5/6">
+            <div class="h-1/3 flex items-center justify-evenly flex-col xl:h-1/2">
+                <h1 tag-key="title" class="text-3xl text-center text-white font-montserrat xl:text-6xl">Backloggd Game
+                    Randomizer</h1>
+                <p tag-key="description" class="text-lg text-white text-center xl:text-2xl">Aren't you tired of choosing
+                    your own
+                    game? Your problem is over!<br>Put your username in the box below and let the random wizard pick a
+                    game for you.</p>
+                <p class="text-3xl animate-zoomInAndOut">&#127922</p>
+            </div>
+            <form method="get" id="infoForm" class="h-1/2 w-full flex flex-col justify-between items-center xl:h-1/2 ">
+                <input tag-key="placeholder"
+                    class="h-12 w-full p-4 outline-none text-2xl bg-inputs-background rounded-3xl border-gray-400 border-2 text-white xl:text-3xl xl:h-20 xl:w-full xl:p-6"
+                    autocomplete="off" placeholder="Your username here!" id="username" />
+                <div class="w-full flex flex-col justify-evenly items-center h-2/3 xl:h-1/3 xl:flex-row">
+                    <!-- Genre -->
+                    <div class="w-full flex flex-col justify-evenly items-center xl:w-1/3">
+                        <label class="text-white text-2xl" tag-key="genre">Genre</label>
+                        <select id="genre"
+                            class="w-4/5 bg-inputs-background text-white rounded-xl border-white border-2 p-3 xl:w-60">
+                        </select>
+                    </div>
+                    <!-- Category -->
+                    <div class="w-full flex flex-col justify-evenly items-center xl:w-1/3">
+                        <label class="text-white text-2xl" tag-key="category">Category</label>
+                        <select id="gameCategory"
+                            class="w-4/5 bg-inputs-background text-white rounded-xl border-white border-2 p-3 xl:w-60">
+                        </select>
+                    </div>
+                    <!-- Platform -->
+                    <div class="w-full flex flex-col justify-evenly items-center xl:w-1/3 ">
+                        <label class="text-white text-2xl" tag-key="platform">Platform</label>
+                        <select id="platform"
+                            class="w-4/5 bg-inputs-background text-white rounded-xl border-white border-2 p-3 truncate xl:w-64">
+                        </select>
+                    </div>
+                </div>
+                <button tag-key="button-search" type="submit"
+                    class="h-14  w-1/4 text-xl bg-inputs-background rounded-2xl border-gray-400 border-2 text-white  text-center outline-none hover:bg-inputs-background-hover xl:h-16 xl:text-2xl "
+                    id="submit">Search</button>
+            </form>
+            <div class="w-full h-24 flex justify-center items-end">
+                <select class="h-12 w-20 p-2 bg-inputs-background border-2 border-white rounded-xl text-lg text-white"
+                    id="locale">
+                    <option value="en">&#x1F1FA;&#x1F1F8;</option>
+                    <option value="pt-BR">&#x1F1E7;&#x1F1F7;</option>
+                </select>
+            </div>
+        </section>
+        <div id="responseOverlay"
+            class="absolute w-screen h-screen flex justify-center items-center bg-black bg-opacity-70 hidden">
+            <div class="w-5/6 h-2/3 flex justify-evenly items-center rounded-3xl border-2 bg-popup xl:w-1/4 xl:h-2/3 ">
+                <div id="loading" class="w-full h-full flex justify-center items-center hidden">
+                    <div
+                        class="w-loading-mobile h-loading-mobile rounded-50 border-8 border-white border-t-gray-600 animate-spin xl:w-loading-pc xl:h-loading-pc ">
+
+                    </div>
+                </div>
+                <div id="error" class="w-5/6 h-full flex flex-col justify-center items-center gap-10 hidden">
+                    <h2 id="errorMessage" class="text-2xl text-white text-center"></h2>
+                    <button tag-key="button-close"
+                        class="bg-inputs-background h-12 w-20 border-2 border-white rounded-2xl text-white hover:bg-inputs-background-hover"
+                        onclick="hideResponse()">
+                        Close
+                    </button>
+                </div>
+                <div id="gameDiv" class="w-full h-full flex flex-col justify-evenly items-center hidden">
+                    <h1 tag-key="game-found" class="text-2xl font-montserrat text-white xl:text-3xl">The chosen game is:</h1>
+                    <h2 id="gameName" class="text-xl text-white text-center xl:text-2xl"></h2>
+                    <div class="w-3/4 h-3/5 bg-transparent border-2 border-white rounded-3xl xl:w-2/3">
+                        <img id="gamePhoto" class="w-full h-full rounded-3xl" src="" alt="" srcset="">
+                    </div>
+                    <button tag-key="button-game"
+                        class="bg-inputs-background h-12 w-20 border-2 border-white rounded-2xl text-white hover:bg-inputs-background-hover"
+                        onclick="hideResponse()">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="index.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+services:
+  front-end:
+    build: 'ui/'
+    container_name: 'front-end'
+    ports:
+      - "3000:80"
+    restart: always
+
+  back-end:
+    build: '.'
+    container_name: 'back-end'
+    ports:
+      - "5000:5000"
+    restart: always
+    networks:
+      - back-db
+      - selenium-back
+
+  database:
+    image: 'bitnami/memcached:1.6.33'
+    container_name: 'database'
+    ports:
+      - "11211:11211"
+    restart: always
+    networks:
+      - back-db
+
+  selenium:
+    image: 'selenium/standalone-edge:131.0'
+    container_name: 'selenium'
+    ports:
+      - "4444:4444"
+    environment:
+      - SE_ENABLE_TRACING=false
+      - SE_NODE_SESSION_TIMEOUT=2
+      - SE_SESSION_REQUEST_TIMEOUT=5
+    restart: always
+    networks:
+      - selenium-back
+
+networks:
+  back-db:
+    driver: bridge
+  selenium-back:
+    driver: bridge
